@@ -1073,31 +1073,47 @@ tagFilter.addEventListener(
 
 function randomCharacter() {
 
-    if (
-        characters.length === 0
-    ) return;
+    if (characters.length === 0) return;
+
+
+    const available =
+        getFilteredCharacters();
+
+
+    if (available.length === 0) return;
 
 
     const random =
-        characters[
+        available[
             Math.floor(
                 Math.random() *
-                characters.length
+                available.length
             )
         ];
-
-
-    const index =
-        characters.indexOf(
-            random
-        );
 
 
     renderCharacters();
 
 
+    const cards =
+        [...grid.children];
+
+
     const card =
-        grid.children[index];
+        cards.find(
+            element => {
+
+                const button =
+                    element.querySelector(
+                        ".favorite-button"
+                    );
+
+                return button &&
+                    button.dataset.id ===
+                    random.id;
+
+            }
+        );
 
 
     if (card) {
@@ -1112,18 +1128,21 @@ function randomCharacter() {
             "1px solid #b99a63";
 
 
+        card.style.boxShadow =
+            "0 0 50px rgba(185,154,99,.25)";
+
+
         setTimeout(() => {
 
-            card.style.outline =
-                "";
+            card.style.outline = "";
+
+            card.style.boxShadow = "";
 
         }, 1800);
 
     }
 
 }
-
-
 document
     .getElementById(
         "randomArchiveButton"

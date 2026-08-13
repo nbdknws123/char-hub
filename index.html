@@ -1,121 +1,279 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
+
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>CHARHUB — Roleplay Character Archive</title>
+    <title>CHARHUB — Roleplay Archive</title>
 
     <meta
         name="description"
-        content="Discover characters and start your next roleplay story."
+        content="A curated archive of roleplay characters."
     >
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-    <!-- Background -->
-    <div class="background">
-        <div class="glow glow-one"></div>
-        <div class="glow glow-two"></div>
-        <div class="grain"></div>
+    <!-- =========================
+         BACKGROUND
+    ========================== -->
+
+    <div class="site-background">
+
+        <div class="bg-glow bg-glow-left"></div>
+
+        <div class="bg-glow bg-glow-right"></div>
+
+        <div class="bg-noise"></div>
+
+        <div class="bg-grid"></div>
+
     </div>
 
 
-    <!-- NAVIGATION -->
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
     <header class="navbar">
 
-        <div class="logo">
-            <span class="logo-symbol">✦</span>
-            <span>CHAR<span>HUB</span></span>
-        </div>
+        <a
+            href="#home"
+            class="brand"
+        >
 
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#characters">Characters</a>
-            <a href="#categories">Categories</a>
-            <a href="#about">About</a>
+            <span class="brand-mark">✦</span>
+
+            <span class="brand-name">
+                CHAR<span>HUB</span>
+            </span>
+
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a href="#home" class="nav-link active">
+                Home
+            </a>
+
+            <a href="#characters" class="nav-link">
+                Characters
+            </a>
+
+            <a href="#categories" class="nav-link">
+                Categories
+            </a>
+
+            <a href="#about" class="nav-link">
+                About
+            </a>
+
         </nav>
 
-        <button class="nav-button" onclick="document.getElementById('characters').scrollIntoView()">
-            Explore
+
+        <button
+            class="nav-explore"
+            onclick="document.getElementById('characters').scrollIntoView({behavior:'smooth'})"
+        >
+            <span>Explore</span>
+            <span class="nav-arrow">↗</span>
         </button>
 
     </header>
 
 
-    <!-- HERO -->
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
     <main>
 
-        <section class="hero" id="home">
+        <section
+            class="hero"
+            id="home"
+        >
 
-            <div class="hero-content">
+            <!-- LEFT -->
 
-                <div class="eyebrow">
-                    <span></span>
-                    ROLEPLAY CHARACTER ARCHIVE
-                    <span></span>
+            <div class="hero-left">
+
+                <div class="hero-kicker">
+
+                    <span class="kicker-line"></span>
+
+                    <span>
+                        ROLEPLAY CHARACTER ARCHIVE
+                    </span>
+
+                    <span class="kicker-dot">✦</span>
+
                 </div>
 
-                <h1>
+
+                <h1 class="hero-title">
+
                     FIND YOUR
-                    <strong>CHARACTER.</strong>
+
+                    <span>
+                        NEXT STORY.
+                    </span>
+
                 </h1>
 
-                <p>
-                    Enter a world of characters, stories and personalities.
-                    Find someone who fits your next roleplay.
+
+                <p class="hero-description">
+
+                    A curated collection of characters,
+                    personalities and worlds waiting for
+                    their next story to begin.
+
                 </p>
 
-                <div class="hero-search">
 
-                    <span class="search-icon">⌕</span>
+                <div class="hero-actions">
 
-                    <input
-                        type="text"
-                        id="searchInput"
-                        placeholder="Search characters..."
-                        autocomplete="off"
+                    <button
+                        class="primary-button"
+                        onclick="document.getElementById('characters').scrollIntoView({behavior:'smooth'})"
                     >
 
-                    <span class="search-key">⌘ K</span>
+                        <span>EXPLORE CHARACTERS</span>
+
+                        <span class="button-icon">↗</span>
+
+                    </button>
+
+
+                    <button
+                        class="secondary-button"
+                        id="randomButton"
+                    >
+
+                        <span class="dice-symbol">✦</span>
+
+                        RANDOM CHARACTER
+
+                    </button>
 
                 </div>
 
-                <div class="hero-stats">
 
-                    <div>
-                        <strong id="characterCount">0</strong>
-                        <span>Characters</span>
+                <div class="hero-meta">
+
+                    <div class="meta-item">
+
+                        <strong id="characterCount">
+                            0
+                        </strong>
+
+                        <span>
+                            Characters
+                        </span>
+
                     </div>
 
-                    <div class="stat-line"></div>
 
-                    <div>
-                        <strong>∞</strong>
-                        <span>Stories</span>
+                    <div class="meta-divider"></div>
+
+
+                    <div class="meta-item">
+
+                        <strong>
+                            ∞
+                        </strong>
+
+                        <span>
+                            Stories
+                        </span>
+
                     </div>
 
-                    <div class="stat-line"></div>
 
-                    <div>
-                        <strong>24/7</strong>
-                        <span>Explore</span>
+                    <div class="meta-divider"></div>
+
+
+                    <div class="meta-item">
+
+                        <strong>
+                            24/7
+                        </strong>
+
+                        <span>
+                            Explore
+                        </span>
+
                     </div>
 
                 </div>
 
             </div>
 
-            <div class="hero-decoration">
 
-                <div class="ornament-circle">
-                    <div class="inner-circle">
-                        ✦
+
+            <!-- RIGHT DECORATION -->
+
+            <div class="hero-right">
+
+                <div class="hero-aura"></div>
+
+
+                <div class="hero-frame">
+
+                    <div class="frame-corner corner-tl"></div>
+
+                    <div class="frame-corner corner-tr"></div>
+
+                    <div class="frame-corner corner-bl"></div>
+
+                    <div class="frame-corner corner-br"></div>
+
+
+                    <div class="frame-inner">
+
+                        <div class="frame-symbol">
+                            ✦
+                        </div>
+
+                        <div class="frame-line"></div>
+
+                        <span>
+                            ENTER
+                        </span>
+
+                        <strong>
+                            THE ARCHIVE
+                        </strong>
+
+                        <div class="frame-line"></div>
+
+                        <small>
+                            CHARHUB · 2026
+                        </small>
+
                     </div>
+
+                </div>
+
+
+                <div class="floating-word word-one">
+                    CHARACTERS
+                </div>
+
+                <div class="floating-word word-two">
+                    STORIES
                 </div>
 
             </div>
@@ -123,379 +281,176 @@
         </section>
 
 
-        <!-- FEATURED -->
-        <section class="section" id="characters">
 
-            <div class="section-heading">
+        <!-- =========================
+             ANNOUNCEMENT PLACEHOLDER
+        ========================== -->
 
-                <div>
-                    <span class="section-label">DISCOVER</span>
+        <section
+            class="announcement"
+            id="announcement"
+        >
 
-                    <h2>
-                        Featured
-                        <em>Characters</em>
-                    </h2>
-                </div>
-
-                <p>
-                    Explore the characters waiting
-                    for their next story.
-                </p>
-
+            <div class="announcement-icon">
+                ✦
             </div>
 
-
-            <!-- FILTER -->
-            <div class="filter-bar">
-
-                <button class="filter active" data-filter="all">
-                    All
-                </button>
-
-                <button class="filter" data-filter="BL">
-                    BL
-                </button>
-
-                <button class="filter" data-filter="CEO">
-                    CEO
-                </button>
-
-                <button class="filter" data-filter="Fantasy">
-                    Fantasy
-                </button>
-
-                <button class="filter" data-filter="Cold">
-                    Cold
-                </button>
-
-                <button class="filter" data-filter="Rich">
-                    Rich
-                </button>
-
+            <div class="announcement-label">
+                NOTICE
             </div>
 
+            <div class="announcement-text">
+                Welcome to CHARHUB — the archive is now open.
+            </div>
 
-            <!-- CHARACTER GRID -->
-            <div
-                class="character-grid"
-                id="characterGrid"
-            ></div>
-
-            <div
-                class="empty-state"
-                id="emptyState"
-            >
-                <span>✦</span>
-                <h3>No characters found</h3>
-                <p>Try another name or category.</p>
+            <div class="announcement-arrow">
+                →
             </div>
 
         </section>
 
 
-        <!-- CATEGORIES -->
-        <section class="categories-section" id="categories">
 
-            <div class="section-heading centered">
+        <!--
+        =========================================
+        CHARACTER SECTION
 
-                <div>
-                    <span class="section-label">
-                        EXPLORE
-                    </span>
+        SẼ ĐƯỢC LÀM Ở BƯỚC TIẾP THEO
+        =========================================
+        -->
 
-                    <h2>
-                        Choose your
-                        <em>world</em>
-                    </h2>
-                </div>
+        <section
+            id="characters"
+            class="future-section"
+        >
 
-            </div>
-
-
-            <div class="category-grid">
-
-                <div class="category-card">
-                    <span>♢</span>
-                    <h3>BL</h3>
-                    <p>Characters & relationships</p>
-                </div>
-
-                <div class="category-card">
-                    <span>♜</span>
-                    <h3>CEO</h3>
-                    <p>Power, wealth & ambition</p>
-                </div>
-
-                <div class="category-card">
-                    <span>✧</span>
-                    <h3>Fantasy</h3>
-                    <p>Magic & extraordinary worlds</p>
-                </div>
-
-                <div class="category-card">
-                    <span>☾</span>
-                    <h3>Mystery</h3>
-                    <p>Secrets waiting to unfold</p>
-                </div>
-
-            </div>
+            <span>
+                CHARACTER ARCHIVE
+            </span>
 
         </section>
 
 
-        <!-- ABOUT -->
-        <section class="about-section" id="about">
 
-            <div class="about-box">
+        <section
+            id="categories"
+            class="future-section"
+        >
 
-                <div class="about-symbol">
-                    ✦
-                </div>
+            <span>
+                CATEGORIES
+            </span>
 
-                <div>
+        </section>
 
-                    <span class="section-label">
-                        ABOUT CHARHUB
-                    </span>
 
-                    <h2>
-                        Every character
-                        <em>has a story.</em>
-                    </h2>
 
-                    <p>
-                        CHARHUB is a personal archive for
-                        roleplay characters. Browse different
-                        personalities, worlds and stories,
-                        then follow the character link to begin
-                        your next roleplay.
-                    </p>
+        <section
+            id="about"
+            class="future-section"
+        >
 
-                </div>
-
-            </div>
+            <span>
+                ABOUT CHARHUB
+            </span>
 
         </section>
 
     </main>
 
 
-    <!-- FOOTER -->
-    <footer>
 
-        <div class="footer-logo">
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer">
+
+        <div class="footer-brand">
             ✦ CHARHUB
         </div>
 
-        <p>
-            A collection of characters & stories.
-        </p>
-
         <span>
-            © 2026 CHARHUB
+            A collection of characters & stories.
         </span>
 
     </footer>
 
 
+
+    <!-- CHARACTER DATA -->
+
     <script src="characters.js"></script>
+
 
     <script>
 
-        const grid = document.getElementById("characterGrid");
-        const searchInput = document.getElementById("searchInput");
-        const emptyState = document.getElementById("emptyState");
-        const countElement = document.getElementById("characterCount");
+        /*
+        ==========================================
+        CHARACTER COUNT
+        ==========================================
+        */
 
-        let currentFilter = "all";
+        if (window.characters) {
 
-        countElement.textContent = window.characters.length;
-
-
-        function renderCharacters() {
-
-            const searchTerm =
-                searchInput.value.toLowerCase().trim();
-
-            const filteredCharacters =
-                window.characters.filter(character => {
-
-                    const matchesSearch =
-                        character.name
-                            .toLowerCase()
-                            .includes(searchTerm)
-                        ||
-                        character.description
-                            .toLowerCase()
-                            .includes(searchTerm)
-                        ||
-                        character.tags.some(tag =>
-                            tag.toLowerCase().includes(searchTerm)
-                        );
-
-                    const matchesFilter =
-                        currentFilter === "all"
-                        ||
-                        character.tags.includes(currentFilter);
-
-                    return matchesSearch && matchesFilter;
-
-                });
-
-
-            grid.innerHTML = "";
-
-
-            filteredCharacters.forEach((character, index) => {
-
-                const card = document.createElement("article");
-
-                card.className = "character-card";
-
-                card.style.animationDelay =
-                    `${index * 0.08}s`;
-
-
-                card.innerHTML = `
-
-                    <div class="card-image">
-
-                        <img
-                            src="${character.image}"
-                            alt="${character.name}"
-                            loading="lazy"
-                        >
-
-                        <div class="image-overlay"></div>
-
-                        <div class="card-number">
-                            ${String(index + 1).padStart(2, "0")}
-                        </div>
-
-                        <div class="card-platform">
-                            ${character.platform}
-                        </div>
-
-                    </div>
-
-
-                    <div class="card-content">
-
-                        <div class="tags">
-
-                            ${character.tags
-                                .slice(0, 3)
-                                .map(tag =>
-                                    `<span>${tag}</span>`
-                                )
-                                .join("")
-                            }
-
-                        </div>
-
-
-                        <h3>
-                            ${character.name}
-                        </h3>
-
-
-                        <p>
-                            ${character.description}
-                        </p>
-
-
-                        <div class="card-footer">
-
-                            <span class="creator">
-                                by ${character.creator}
-                            </span>
-
-                            <a
-                                href="${character.link}"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="roleplay-button"
-                            >
-                                ROLEPLAY
-                                <span>↗</span>
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                `;
-
-
-                grid.appendChild(card);
-
-            });
-
-
-            emptyState.classList.toggle(
-                "show",
-                filteredCharacters.length === 0
-            );
+            document.getElementById(
+                "characterCount"
+            ).textContent =
+                window.characters.length;
 
         }
 
 
-        searchInput.addEventListener(
-            "input",
-            renderCharacters
-        );
+
+        /*
+        ==========================================
+        RANDOM CHARACTER
+
+        Tạm thời nút random sẽ chọn một nhân vật
+        và đưa ra thông báo.
+
+        Ở bước sau chúng ta sẽ làm thành
+        popup/card random thật đẹp.
+        ==========================================
+        */
+
+        const randomButton =
+            document.getElementById("randomButton");
 
 
-        document
-            .querySelectorAll(".filter")
-            .forEach(button => {
-
-                button.addEventListener(
-                    "click",
-                    () => {
-
-                        document
-                            .querySelectorAll(".filter")
-                            .forEach(btn =>
-                                btn.classList.remove("active")
-                            );
-
-                        button.classList.add("active");
-
-                        currentFilter =
-                            button.dataset.filter;
-
-                        renderCharacters();
-
-                    }
-                );
-
-            });
-
-
-        document.addEventListener(
-            "keydown",
-            event => {
+        randomButton.addEventListener(
+            "click",
+            function () {
 
                 if (
-                    (event.ctrlKey || event.metaKey)
-                    &&
-                    event.key.toLowerCase() === "k"
+                    !window.characters ||
+                    window.characters.length === 0
                 ) {
-
-                    event.preventDefault();
-
-                    searchInput.focus();
-
+                    return;
                 }
+
+
+                const randomIndex =
+                    Math.floor(
+                        Math.random() *
+                        window.characters.length
+                    );
+
+
+                const character =
+                    window.characters[randomIndex];
+
+
+                alert(
+                    "✦ Your character:\n\n" +
+                    character.name
+                );
 
             }
         );
 
-
-        renderCharacters();
-
     </script>
 
 </body>
+
 </html>

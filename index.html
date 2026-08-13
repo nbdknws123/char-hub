@@ -664,19 +664,9 @@ document.getElementById(
    GET ALL TAGS
 ===================================================== */
 
-const allTags = [
-    ...new Set(
-        characters.flatMap(
-            character => character.tags || []
-        )
-    )
-];
-
-
 function renderTags() {
 
     tagFilter.innerHTML = "";
-
 
     const allButton =
         document.createElement("button");
@@ -693,6 +683,16 @@ function renderTags() {
     tagFilter.appendChild(
         allButton
     );
+
+
+    const allTags = [
+        ...new Set(
+            characters.flatMap(
+                character =>
+                    character.tags || []
+            )
+        )
+    ];
 
 
     allTags.forEach(tag => {

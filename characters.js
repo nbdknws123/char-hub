@@ -1,47 +1,109 @@
 const characters = [
+
     {
         id: "co-hai",
+
         name: "Cố Hải",
-        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=900",
-        description: "Một thiếu gia kiêu ngạo, quyết đoán và mang khí chất áp đảo. Bề ngoài lạnh lùng nhưng bên trong là một con người cực kỳ cố chấp.",
-        tags: ["BL", "CEO", "Rich", "Possessive"],
-        platform: "Roleplay",
+
+        image: "LINK_ANH_CUA_CO_HAI",
+
+        description:
+            "Một thiếu gia kiêu ngạo, quyết đoán và mang khí chất áp đảo. Bề ngoài lạnh lùng nhưng bên trong cực kỳ cố chấp.",
+
+        tags: [
+            "BL",
+            "CEO",
+            "Rich",
+            "Possessive"
+        ],
+
         creator: "Your Name",
-        link: "https://example.com"
+
+        featured: true,
+
+        likes: 128,
+
+        createdAt: "2026-08-13",
+
+        platforms: [
+            {
+                name: "Platform 1",
+                url: "https://example.com"
+            },
+            {
+                name: "Platform 2",
+                url: "https://example.com"
+            }
+        ]
     },
+
 
     {
         id: "van-thien-long",
+
         name: "Văn Thiên Long",
-        image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=900",
-        description: "Một người đàn ông điềm tĩnh, lạnh lùng và khó đoán. Khí chất trưởng thành khiến người khác khó có thể phớt lờ sự hiện diện của hắn.",
-        tags: ["BL", "CEO", "Cold", "Mature"],
-        platform: "Roleplay",
+
+        image: "LINK_ANH_VAN_THIEN_LONG",
+
+        description:
+            "Một người đàn ông điềm tĩnh, trưởng thành và khó đoán. Sự hiện diện của hắn luôn mang đến cảm giác áp lực khó gọi tên.",
+
+        tags: [
+            "BL",
+            "CEO",
+            "Cold",
+            "Mature"
+        ],
+
         creator: "Your Name",
-        link: "https://example.com"
+
+        featured: true,
+
+        likes: 96,
+
+        createdAt: "2026-08-12",
+
+        platforms: [
+            {
+                name: "Platform 1",
+                url: "https://example.com"
+            }
+        ]
     },
+
 
     {
         id: "tan-mac",
-        name: "Tần Mặc",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900",
-        description: "Một nhân vật bí ẩn với vẻ ngoài trầm tĩnh và ánh mắt khó đoán. Càng tiếp xúc càng khó biết hắn thực sự đang nghĩ gì.",
-        tags: ["Fantasy", "Mystery", "Cold"],
-        platform: "Roleplay",
-        creator: "Your Name",
-        link: "https://example.com"
-    },
 
-    {
-        id: "character-four",
-        name: "Mặc Uyên",
-        image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=900",
-        description: "Một nhân vật mang khí chất quyền lực, thanh lịch và có phần nguy hiểm.",
-        tags: ["Fantasy", "Powerful", "Elegant"],
-        platform: "Roleplay",
+        name: "Tần Mặc",
+
+        image: "LINK_ANH_TAN_MAC",
+
+        description:
+            "Một nhân vật bí ẩn, trầm lặng và khó đoán. Càng tiếp xúc càng khó biết hắn thực sự đang nghĩ gì.",
+
+        tags: [
+            "Fantasy",
+            "Mystery",
+            "Cold"
+        ],
+
         creator: "Your Name",
-        link: "https://example.com"
+
+        featured: false,
+
+        likes: 74,
+
+        createdAt: "2026-08-10",
+
+        platforms: [
+            {
+                name: "Platform 1",
+                url: "https://example.com"
+            }
+        ]
     }
+
 ];
 
 window.characters = characters;

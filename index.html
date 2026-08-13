@@ -496,75 +496,675 @@
     <!-- CHARACTER DATA -->
 
     <script src="characters.js"></script>
+<script>
+
+/* =====================================================
+   CHARACTER ARCHIVE ENGINE
+===================================================== */
+
+const characters =
+    window.characters || [];
 
 
-    <script>
+const grid =
+    document.getElementById("characterGrid");
 
-        /*
-        ==========================================
-        CHARACTER COUNT
-        ==========================================
-        */
 
-        if (window.characters) {
+const searchInput =
+    document.getElementById("searchInput");
 
-            document.getElementById(
-                "characterCount"
-            ).textContent =
-                window.characters.length;
+
+const tagFilter =
+    document.getElementById("tagFilter");
+
+
+const resultCount =
+    document.getElementById("resultCount");
+
+
+const emptyState =
+    document.getElementById("emptyState");
+
+
+let currentMode = "all";
+
+let currentTag = "all";
+
+let searchTerm = "";
+
+
+/* =====================================================
+   COUNT
+===================================================== */
+
+document.getElementById(
+    "characterCount"
+).textContent = characters.length;
+
+
+/* =====================================================
+   GET ALL TAGS
+===================================================== */
+
+const allTags = [
+    ...new Set(
+        characters.flatMap(
+            character => character.tags || []
+        )
+    )
+];
+
+
+function renderTags() {
+
+    tagFilter.innerHTML = "";
+
+
+    const allButton =
+        document.createElement("button");
+
+    allButton.className =
+        "tag-button active";
+
+    allButton.dataset.tag =
+        "all";
+
+    allButton.textContent =
+        "ALL TAGS";
+
+    tagFilter.appendChild(
+        allButton
+    );
+
+
+    allTags.forEach(tag => {
+
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "tag-button";
+
+        button.dataset.tag =
+            tag;
+
+        button.textContent =
+            tag;
+
+        tagFilter.appendChild(
+            button
+        );
+
+    });
+
+}
+
+
+renderTags();
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+function getFilteredCharacters() {
+
+    let result =
+        [...characters];
+
+
+    /* MODE */
+
+    if (currentMode === "featured") {
+
+        result =
+            result.filter(
+                character =>
+                    character.featured === true
+            );
+
+    }
+
+
+    if (currentMode === "newest") {
+
+        result.sort(
+            (a, b) =>
+                new Date(b.createdAt) -
+                new Date(a.createdAt)
+        );
+
+    }
+
+
+    /* TAG */
+
+    if (currentTag !== "all") {
+
+        result =
+            result.filter(
+                character =>
+                    (character.tags || [])
+                        .some(
+                            tag =>
+                                tag.toLowerCase() ===
+                                currentTag.toLowerCase()
+                        )
+            );
+
+    }
+
+
+    /* SEARCH */
+
+    if (searchTerm) {
+
+        const query =
+            searchTerm.toLowerCase();
+
+
+        result =
+            result.filter(
+                character => {
+
+                    const searchable = [
+
+                        character.name,
+
+                        character.description,
+
+                        character.creator,
+
+                        ...(character.tags || [])
+
+                    ]
+                    .join(" ")
+                    .toLowerCase();
+
+
+                    return searchable.includes(
+                        query
+                    );
+
+                }
+            );
+
+    }
+
+
+    return result;
+
+}
+
+
+/* =====================================================
+   RENDER CARDS
+===================================================== */
+
+function renderCharacters() {
+
+    const result =
+        getFilteredCharacters();
+
+
+    grid.innerHTML = "";
+
+
+    resultCount.textContent =
+        `${result.length} CHARACTER${result.length === 1 ? "" : "S"}`;
+
+
+    if (result.length === 0) {
+
+        emptyState.classList.add(
+            "visible"
+        );
+
+        return;
+
+    }
+
+
+    emptyState.classList.remove(
+        "visible"
+    );
+
+
+    result.forEach(
+        character => {
+
+            const card =
+                document.createElement("article");
+
+            card.className =
+                "character-card";
+
+
+            const tags =
+                (character.tags || [])
+                    .slice(0, 4)
+                    .map(
+                        tag =>
+                            `<span class="card-tag">#${tag}</span>`
+                    )
+                    .join("");
+
+
+            const platforms =
+                (character.platforms || [])
+                    .slice(0, 2)
+                    .map(
+                        platform =>
+                            `
+                            <a
+                                class="platform-link"
+                                href="${platform.url}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                ${platform.name} ↗
+                            </a>
+                            `
+                    )
+                    .join("");
+
+
+            card.innerHTML = `
+
+                <img
+                    class="card-image"
+                    src="${character.image}"
+                    alt="${character.name}"
+                    loading="lazy"
+                    onerror="
+                        this.style.display='none'
+                    "
+                >
+
+
+                <div class="card-overlay"></div>
+
+
+                <div class="card-top">
+
+                    ${
+                        character.featured
+                        ?
+                        `
+                        <span class="featured-label">
+                            ✦ FEATURED
+                        </span>
+                        `
+                        :
+                        `<span></span>`
+                    }
+
+
+                    <button
+                        class="favorite-button"
+                        data-id="${character.id}"
+                        aria-label="Favorite"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="card-content">
+
+                    <div class="card-tags">
+                        ${tags}
+                    </div>
+
+
+                    <h3 class="card-title">
+                        ${character.name}
+                    </h3>
+
+
+                    <p class="card-description">
+                        ${character.description}
+                    </p>
+
+
+                    <div class="card-bottom">
+
+                        <span class="card-creator">
+                            BY ${character.creator}
+                        </span>
+
+
+                        <div class="platform-links">
+                            ${platforms}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            grid.appendChild(card);
 
         }
+    );
 
 
+    setupFavoriteButtons();
 
-        /*
-        ==========================================
-        RANDOM CHARACTER
-
-        Tạm thời nút random sẽ chọn một nhân vật
-        và đưa ra thông báo.
-
-        Ở bước sau chúng ta sẽ làm thành
-        popup/card random thật đẹp.
-        ==========================================
-        */
-
-        const randomButton =
-            document.getElementById("randomButton");
+}
 
 
-        randomButton.addEventListener(
+/* =====================================================
+   FAVORITES
+===================================================== */
+
+function getFavorites() {
+
+    return JSON.parse(
+        localStorage.getItem(
+            "charhub-favorites"
+        ) || "[]"
+    );
+
+}
+
+
+function saveFavorites(favorites) {
+
+    localStorage.setItem(
+        "charhub-favorites",
+        JSON.stringify(favorites)
+    );
+
+}
+
+
+function setupFavoriteButtons() {
+
+    const favorites =
+        getFavorites();
+
+
+    document
+        .querySelectorAll(
+            ".favorite-button"
+        )
+        .forEach(button => {
+
+            const id =
+                button.dataset.id;
+
+
+            if (
+                favorites.includes(id)
+            ) {
+
+                button.classList.add(
+                    "saved"
+                );
+
+                button.textContent =
+                    "♥";
+
+            }
+
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    let current =
+                        getFavorites();
+
+
+                    if (
+                        current.includes(id)
+                    ) {
+
+                        current =
+                            current.filter(
+                                item =>
+                                    item !== id
+                            );
+
+                        button.classList.remove(
+                            "saved"
+                        );
+
+                        button.textContent =
+                            "♡";
+
+                    }
+
+                    else {
+
+                        current.push(id);
+
+                        button.classList.add(
+                            "saved"
+                        );
+
+                        button.textContent =
+                            "♥";
+
+                    }
+
+
+                    saveFavorites(current);
+
+                }
+            );
+
+        });
+
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+searchInput.addEventListener(
+    "input",
+    function () {
+
+        searchTerm =
+            this.value.trim();
+
+        renderCharacters();
+
+    }
+);
+
+
+/* =====================================================
+   MODE BUTTONS
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".archive-button"
+    )
+    .forEach(button => {
+
+        button.addEventListener(
             "click",
             function () {
 
-                if (
-                    !window.characters ||
-                    window.characters.length === 0
-                ) {
-                    return;
-                }
-
-
-                const randomIndex =
-                    Math.floor(
-                        Math.random() *
-                        window.characters.length
+                document
+                    .querySelectorAll(
+                        ".archive-button"
+                    )
+                    .forEach(
+                        btn =>
+                            btn.classList.remove(
+                                "active"
+                            )
                     );
 
 
-                const character =
-                    window.characters[randomIndex];
-
-
-                alert(
-                    "✦ Your character:\n\n" +
-                    character.name
+                this.classList.add(
+                    "active"
                 );
+
+
+                currentMode =
+                    this.dataset.filter;
+
+
+                renderCharacters();
 
             }
         );
 
-    </script>
+    });
+
+
+/* =====================================================
+   TAG BUTTONS
+===================================================== */
+
+tagFilter.addEventListener(
+    "click",
+    function(event) {
+
+        const button =
+            event.target.closest(
+                ".tag-button"
+            );
+
+
+        if (!button) return;
+
+
+        document
+            .querySelectorAll(
+                ".tag-button"
+            )
+            .forEach(
+                btn =>
+                    btn.classList.remove(
+                        "active"
+                    )
+            );
+
+
+        button.classList.add(
+            "active"
+        );
+
+
+        currentTag =
+            button.dataset.tag;
+
+
+        renderCharacters();
+
+    }
+);
+
+
+/* =====================================================
+   RANDOM
+===================================================== */
+
+function randomCharacter() {
+
+    if (
+        characters.length === 0
+    ) return;
+
+
+    const random =
+        characters[
+            Math.floor(
+                Math.random() *
+                characters.length
+            )
+        ];
+
+
+    const index =
+        characters.indexOf(
+            random
+        );
+
+
+    renderCharacters();
+
+
+    const card =
+        grid.children[index];
+
+
+    if (card) {
+
+        card.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+
+        card.style.outline =
+            "1px solid #b99a63";
+
+
+        setTimeout(() => {
+
+            card.style.outline =
+                "";
+
+        }, 1800);
+
+    }
+
+}
+
+
+document
+    .getElementById(
+        "randomArchiveButton"
+    )
+    .addEventListener(
+        "click",
+        randomCharacter
+    );
+
+
+/* HERO RANDOM BUTTON */
+
+document
+    .getElementById(
+        "randomButton"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            randomCharacter();
+
+            document
+                .getElementById(
+                    "characters"
+                )
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+    );
+
+
+/* =====================================================
+   INITIAL RENDER
+===================================================== */
+
+renderCharacters();
+
+</script>
 
 </body>
 

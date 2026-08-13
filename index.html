@@ -623,9 +623,6 @@ async function loadCharactersFromSheet() {
    CHARACTER ARCHIVE ENGINE
 ===================================================== */
 
-const characters =
-    window.characters || [];
-
 
 const grid =
     document.getElementById("characterGrid");
@@ -1302,7 +1299,7 @@ document
    INITIAL RENDER
 ===================================================== */
 
-renderCharacters();
+loadCharactersFromSheet();
 
 </script>
 

@@ -495,7 +495,128 @@
 
     <!-- CHARACTER DATA -->
 
-    <script src="characters.js"></script>
+<script>
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQAytUVKlMRa29kOXMn4Vuf_6SbncyBOB7km-mgFdtZkuQK-1DoSaC9jY-BMmo3nEtgjYXc1s2Akg7h/pub?output=tsv";
+
+let characters = [];
+
+async function loadCharactersFromSheet() {
+
+    try {
+
+        const response =
+            await fetch(SHEET_URL);
+
+        const text =
+            await response.text();
+
+        const rows =
+            text.trim().split("\n");
+
+        const headers =
+            rows.shift().split("\t");
+
+        characters =
+            rows
+            .filter(row => row.trim())
+            .map(row => {
+
+                const values =
+                    row.split("\t");
+
+                const data = {};
+
+                headers.forEach(
+                    (header, index) => {
+
+                        data[header.trim()] =
+                            values[index]
+                            ? values[index].trim()
+                            : "";
+
+                    }
+                );
+
+                return {
+
+                    id: data.id,
+
+                    name: data.name,
+
+                    image: data.image,
+
+                    description:
+                        data.description,
+
+                    creator: data.creator,
+
+                    tags:
+                        data.tags
+                        ? data.tags
+                            .split(",")
+                            .map(tag => tag.trim())
+                        : [],
+
+                    featured:
+                        data.featured
+                        .toLowerCase() === "true",
+
+                    createdAt:
+                        data.createdAt,
+
+                    platforms:
+                        data.platforms
+                        ? data.platforms
+                            .split("||")
+                            .map(item => {
+
+                                const parts =
+                                    item.split("|");
+
+                                return {
+
+                                    name:
+                                        parts[0]
+                                        ?.trim() ||
+                                        "RP",
+
+                                    url:
+                                        parts[1]
+                                        ?.trim() ||
+                                        "#"
+
+                                };
+
+                            })
+                        : []
+
+                };
+
+            });
+
+
+        console.log(
+            "Characters loaded:",
+            characters
+        );
+
+
+        renderTags();
+
+        renderCharacters();
+
+
+    } catch (error) {
+
+        console.error(
+            "Cannot load Google Sheet:",
+            error
+        );
+
+    }
+
+}
+</script>
 <script>
 
 /* =====================================================
@@ -974,7 +1095,7 @@ searchInput.addEventListener(
         searchTerm =
             this.value.trim();
 
-        renderCharacters();
+loadCharactersFromSheet();
 
     }
 );

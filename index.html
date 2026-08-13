@@ -318,20 +318,135 @@
         SẼ ĐƯỢC LÀM Ở BƯỚC TIẾP THEO
         =========================================
         -->
+        <section id="characters" class="character-section">
 
-        <section
-            id="characters"
-            class="future-section"
-        >
+    <div class="section-heading">
 
-            <span>
-                CHARACTER ARCHIVE
+        <div>
+            <div class="section-kicker">
+                <span></span>
+                THE ARCHIVE
+            </div>
+
+            <h2>
+                CHARACTER
+                <em>COLLECTION</em>
+            </h2>
+        </div>
+
+        <p class="section-description">
+            Browse the characters, personalities and stories
+            waiting to be discovered.
+        </p>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="archive-toolbar">
+
+        <div class="search-box">
+
+            <span class="search-icon">⌕</span>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search characters..."
+                autocomplete="off"
+            >
+
+            <span class="search-shortcut">
+                SEARCH
             </span>
 
-        </section>
+        </div>
 
 
+        <button
+            class="archive-button active"
+            data-filter="all"
+        >
+            ALL
+        </button>
 
+        <button
+            class="archive-button"
+            data-filter="featured"
+        >
+            ✦ FEATURED
+        </button>
+
+        <button
+            class="archive-button"
+            data-filter="newest"
+        >
+            NEWEST
+        </button>
+
+    </div>
+
+
+    <!-- TAGS -->
+
+    <div
+        class="tag-filter"
+        id="tagFilter"
+    >
+    </div>
+
+
+    <!-- RESULT INFO -->
+
+    <div class="archive-result-bar">
+
+        <span id="resultCount">
+            0 CHARACTERS
+        </span>
+
+        <button
+            id="randomArchiveButton"
+            class="random-archive-button"
+        >
+            ✦ RANDOM CHARACTER
+        </button>
+
+    </div>
+
+
+    <!-- CHARACTER GRID -->
+
+    <div
+        class="character-grid"
+        id="characterGrid"
+    >
+    </div>
+
+
+    <!-- EMPTY RESULT -->
+
+    <div
+        class="empty-state"
+        id="emptyState"
+    >
+
+        <div class="empty-symbol">
+            ✦
+        </div>
+
+        <h3>
+            NO CHARACTER FOUND
+        </h3>
+
+        <p>
+            Try another name, keyword or category.
+        </p>
+
+    </div>
+
+</section>
+        
         <section
             id="categories"
             class="future-section"
